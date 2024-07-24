@@ -1,0 +1,1 @@
+{"uuid":"926df5e5-7ef7-4b4e-a978-8c660002ebf5","name":"com.apitest.RestAPI.tests.DELETEPersonTest","children":["9e542f88-b7b4-4f74-bf55-2837eb856b57"],"befores":[{"name":"initialise","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1720770679016,"stop":1720770679705}],"afters":[],"start":1720770678984,"stop":1720770680772}

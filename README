@@ -1,0 +1,116 @@
+API AUTOMATION Framework:
+-------------------------------------------
+Paste the picture for framework.
+
+To host a local server:
+--------------------------
+ json-server --watch db.json
+
+Step1:
+Property file in Java:(This is under resource folder)
+-------------------------------------------------
+In general, a file is always used to store information. In the same way, 
+in Java programs, the Properties File is always storing the information about the configuration parameters such as
+
+
+--Project configuration data — URL (such as dev, testing, staging, production), username, password, database config.
+
+
+--Project settings config — browser (such as chrome, edge, safari), environments (such as local, remote), 
+images setting directory, timeout.
+
+
+--Properties file is always stored in an extension as .properties in java. 
+It represents Properties class in java where its available utility methods can be used.
+java.util.Properties;
+
+Properties files provide flexibility in terms of configuration in java based application.
+We can store information in a properties file which can be changed over a period of time like database connection properties, password, input file name or location etc.
+We can Read/Write property file using java.util.Properties library of Java.
+
+
+
+Step2:
+SRC Folder:
+-----------------------------------------------------------------------------
+You have two folders in it:
+    -main
+        -Constants-->these will have all the endpoints
+        -utils-->ConfigManager file which helps to retrive data from configuration file
+        -helpers-->PersonService Helper file where we read config varaiables,tell the rest assured about URL and port number ,
+                    implement all the endpoint requests.
+        -model--->these will have POJO classes for each entity in the json file with getters and setters(json annoatation)
+                Helpful for deserialisation and serialisation
+    -test
+        -All the testcases.
+
+Step3:
+POM.xml
+-------------------------------------------------------------------------------------
+    It contain all the maven dependencies like maven,allure,Rest Assured,jackson binder,testNG.
+
+
+
+Challenges I faced while creating this framework:
+----------------------------------------------------------------------------------------------
+
+1.)Related to Deserialisation:
+Problem:
+----------
+Deserialize the JSON string to a List of Person objects because the error message i was encountering suggested that Jackson,
+the JSON library used for serialization and deserialization in my Java application, is expecting a JSON object ({})
+but is receiving a JSON array ([]) instead while doing patch requests. This mismatch occurs during the deserialization process
+ when Jacksonattempts to convert JSON data into a Java object (Person in this case).
+
+    -Solution:
+            If the JSON response for a single person is coming in an array format ([]),
+            you will need to handle it appropriately by deserializing the response as a list and
+            then extracting the single object from that list.
+
+2.)For patch requests it is always recommended to sent the whole body in the postman.But i while building framework it is not necessary to
+ sent the whole body in the request.You can create a Map for updated list fields after deserialization using setters ,apply changed to
+ needed specific fields.
+But in postman provide the whole body Else it is going to replace with only specific fields.
+
+3.)After the cucumber was integrated,while i tried running the feature file-it was not reading the step definition
+Solution:
+
+
+Cucumber Integration:
+------------------------------------------------------------------------
+https://www.baeldung.com/cucumber-rest-api-testing
+
+Yoe need 3 files for it:
+1.)Feature file-(src/test/resources/featureFiles)
+2.)StepDefinition/glue file-(src/test/java/step/definitions)
+3.)TestRunner file (src/main/java/runner)
+
+To generate cucumber reports:
+----------------------------------------------------------------
+https://toolsqa.com/selenium-cucumber-framework/cucumber-reports/
+
+Cucumber.properties file:
+----------------------------------------------
+The cucumber.properties file is typically created in the root of your project directory or within
+the src/test/resources directory in a Maven or Gradle-based project. This file is used to configure various Cucumber options.
+When you run your Cucumber tests, the configurations in cucumber.properties will be automatically picked up and applied.
+
+A typical cucumber.properties file might look like this:
+
+cucumber.features=classpath:features
+cucumber.glue=com.example.stepdefs
+cucumber.plugin=pretty, html:target/cucumber-reports.html
+cucumber.tags=@smokeTest
+
+
+
+
+
+
+
+
+
+
+
+
+
